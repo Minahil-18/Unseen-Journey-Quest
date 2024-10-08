@@ -198,7 +198,7 @@ int main()
     List L1(rows, cols);
 
     L1.random();
-    L1.display();
+    //L1.display();
 
     int key;
     while ((key = getch()) != 27)
