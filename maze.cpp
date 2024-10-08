@@ -142,10 +142,30 @@ class List
             refresh();
         }
 
-        void distance(int x1, int y1, int x2, int y2)
+        int distance(int x1, int y1, int x2, int y2)
         {
             int dis;
-            dis = (x1-x2) + (y1-y2);
+            int x_axis;
+            int y_axis;
+            if (x1>x2)
+            {
+                x_axis = x1-x2;
+            }
+            else
+            {
+                x_axis = x2-x1;
+            }
+            if (y1>y2)
+            {
+                y_axis = y1-y2;
+            }
+            else
+            {
+                y_axis = y2-y1;
+            }
+            
+            dis = (x_axis) + (y_axis);
+            return dis;
         }
 
         void character(int row, int col, char ch)
