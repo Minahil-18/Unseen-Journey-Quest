@@ -105,6 +105,43 @@ class List
             return curr;
         }
 
+        void display()
+        {
+            mvprintw(0, 18, "Mode: Easy");
+            mvprintw(1, 0, "Remaining Moves: ");
+            mvprintw(1, 30, "Remaining Undos: ");
+            mvprintw(2, 0, "Score: ");
+            mvprintw(2, 30, "Key Status: ");
+            mvprintw(3, 0, "Next drop in line: 'C', 'C', 'B', 'C', 'B'");
+            mvprintw(5, 0, "Hint:");
+
+            int offsetX = 10;
+            int offsetY = 5;
+            for (int i = 0; i < rows + 2; i++)
+            {
+                for (int j = 0; j < cols + 2; j++)
+                {
+                    if (i == 0 || i == rows + 1 || j == 0 || j == cols + 1)
+                    {
+                        mvaddch(i + 6 + offsetY, j * 2 + offsetX, '#');
+                    }
+                    else
+                    {
+                        char symbol = current(i - 1, j - 1)->dot;
+                        if (symbol == 'K' || symbol == 'D')
+                        {
+                            mvaddch(i + 6 + offsetY, j * 2 + offsetX, '.');
+                        }
+                        else
+                        {
+                            mvaddch(i + 6 + offsetY, j * 2 + offsetX, symbol);
+                        }
+                    }
+                }
+            }
+            refresh();
+        }
+
         void character(int row, int col, char ch)
         {
             current(row, col)->dot = ch;
@@ -175,7 +212,7 @@ class List
                 playerY--;
             }
             character(playerX, playerY, 'P');
-           // display();
+            display();
         }
 };
 
@@ -198,7 +235,7 @@ int main()
     List L1(rows, cols);
 
     L1.random();
-    //L1.display();
+    L1.display();
 
     int key;
     while ((key = getch()) != 27)
