@@ -142,6 +142,12 @@ class List
             refresh();
         }
 
+        void distance(int x1, int y1, int x2, int y2)
+        {
+            int dis;
+            dis = (x1-x2) + (y1-y2);
+        }
+
         void character(int row, int col, char ch)
         {
             current(row, col)->dot = ch;
