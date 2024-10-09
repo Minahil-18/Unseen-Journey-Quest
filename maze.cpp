@@ -128,14 +128,14 @@ class List
                     else
                     {
                         char symbol = current(i - 1, j - 1)->dot;
-                        if (symbol == 'K' || symbol == 'D')
-                        {
-                            mvaddch(i + 6 + offsetY, j * 2 + offsetX, '.');
-                        }
-                        else
-                        {
-                            mvaddch(i + 6 + offsetY, j * 2 + offsetX, symbol);
-                        }
+                        // if (symbol == 'K' || symbol == 'D')
+                        // {
+                        //     mvaddch(i + 6 + offsetY, j * 2 + offsetX, '.');
+                        // }
+                        // else
+                        // {
+                        //     mvaddch(i + 6 + offsetY, j * 2 + offsetX, symbol);
+                        // }
                     }
                 }
             }
