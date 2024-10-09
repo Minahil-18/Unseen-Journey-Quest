@@ -32,6 +32,9 @@ class List
     public:
         int playerX;
         int playerY;
+        int keyX;
+        int keyY;
+        int initial_dis;
 
         List(int row, int col)
         {
@@ -182,8 +185,8 @@ class List
             playerY = rand() % cols;
             character(playerX, playerY, 'P');
 
-            int keyX = rand() % rows;
-            int keyY = rand() % cols;
+            keyX = rand() % rows;
+            keyY = rand() % cols;
             while (keyX == playerX && keyY == playerY)
             {
                 keyX = rand() % rows;
@@ -193,6 +196,9 @@ class List
 
             int doorX = rand() % rows;
             int doorY = rand() % cols;
+            
+            initial_dis = distance(playerX, playerY, keyX, keyY); // initial distance from player to key
+            
             while ((doorX == playerX && doorY == playerY) || (doorX == keyX && doorY == keyY))
             {
                 doorX = rand() % rows;
@@ -218,11 +224,11 @@ class List
             }
             character(coinX, coinY, 'C');
 
-            int key_dis = distance(playerX, playerY, keyX, keyY);
+            //int key_dis = distance(playerX, playerY, keyX, keyY);
 
             int door_dis = distance(keyX, keyY, doorX, doorY);
 
-            int total_dis = key_dis + door_dis;
+            //int total_dis = key_dis + door_dis;
         }
 
         void movement(int input)
@@ -245,7 +251,22 @@ class List
                 playerY--;
             }
             character(playerX, playerY, 'P');
+
+            int key_dis = distance(playerX, playerY, keyX, keyY);
+
+            if (initial_dis > key_dis)
+            {
+                mvprintw(5, 7, "Getting Closer!!!");
+            }
+
+            else if (initial_dis < key_dis)
+            {
+                mvprintw(5, 7, "Farther Away!!!");
+            }
+
             display();
+
+            
         }
 };
 
