@@ -128,6 +128,7 @@ class List
                     else
                     {
                         char symbol = current(i - 1, j - 1)->dot;
+                        mvaddch(i + 6 + offsetY, j * 2 + offsetX, symbol);
                         // if (symbol == 'K' || symbol == 'D')
                         // {
                         //     mvaddch(i + 6 + offsetY, j * 2 + offsetX, '.');
@@ -216,6 +217,12 @@ class List
                 coinY = rand() % cols;
             }
             character(coinX, coinY, 'C');
+
+            int key_dis = distance(playerX, playerY, keyX, keyY);
+
+            int door_dis = distance(keyX, keyY, doorX, doorY);
+
+            int total_dis = key_dis + door_dis;
         }
 
         void movement(int input)
