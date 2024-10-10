@@ -22,6 +22,22 @@ class Node
         }
 };
 
+class StackNode
+{
+        public:
+            int a;
+            int b;
+            StackNode* next;
+
+            StackNode(int row, int col)
+            {
+                a = row;
+                b = col;
+                next = nullptr;
+            }     
+
+};
+
 class List
 {
     private:
@@ -256,11 +272,11 @@ class List
 
             if (key_dis > initial_dis)
             {
-                mvprintw(5, 10, "Further away!!!");
+                mvprintw(5, 7, "Further away!!!");
             }
             else if (key_dis < initial_dis)
             {
-                mvprintw(5, 10, "Getting closer");
+                mvprintw(5, 7, "Getting closer");
             }
 
             display();
