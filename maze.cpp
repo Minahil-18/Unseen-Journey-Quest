@@ -197,7 +197,7 @@ class List
             int doorX = rand() % rows;
             int doorY = rand() % cols;
             
-            initial_dis = distance(playerX, playerY, keyX, keyY); // initial distance from player to key
+            initial_dis = distance(playerX, playerY, keyX, keyY);
             
             while ((doorX == playerX && doorY == playerY) || (doorX == keyX && doorY == keyY))
             {
@@ -254,14 +254,13 @@ class List
 
             int key_dis = distance(playerX, playerY, keyX, keyY);
 
-            if (initial_dis > key_dis)
+            if (key_dis > initial_dis)
             {
-                mvprintw(5, 7, "Getting Closer!!!");
+                mvprintw(5, 10, "Further away!!!");
             }
-
-            else if (initial_dis < key_dis)
+            else if (key_dis < initial_dis)
             {
-                mvprintw(5, 7, "Farther Away!!!");
+                mvprintw(5, 10, "Getting closer");
             }
 
             display();
