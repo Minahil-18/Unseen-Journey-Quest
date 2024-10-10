@@ -38,12 +38,60 @@ class StackNode
 
 };
 
+class Stack
+{
+    private:
+        StackNode* top;
+
+    public:
+        Stack()
+        {
+            top = nullptr;
+        }
+
+        void push(int m, int n)
+        {
+            StackNode* node1 = new StackNode(m, n);
+            if (top != nullptr)
+            {
+                node1->next = top;
+            }
+            top = node1;
+        }
+
+        StackNode* pop()
+        {
+            if (top == nullptr)
+            {
+                return nullptr;
+            }
+            StackNode* temp = top;
+            top = top->next;
+            return temp;
+        }
+
+        bool empty()
+        {
+            if (top == nullptr)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+};
+
 class List
 {
     private:
         Node* head;
         int rows;
         int cols;
+        Stack stack;
+        int undos;
+        int prevX;
+        int prevY;
 
     public:
         int playerX;
@@ -51,12 +99,16 @@ class List
         int keyX;
         int keyY;
         int initial_dis;
+        int moves;
 
         List(int row, int col)
         {
             head = nullptr;
             rows = row;
             cols = col;
+            prevX = -1;
+            prevY = -1;
+            undos = 6; // easy level
 
             Grid();
         }
