@@ -179,8 +179,8 @@ class List
         void display()
         {
             mvprintw(0, 18, "Mode: Easy");
-            mvprintw(1, 0, "Remaining Moves: ");
-            mvprintw(1, 30, "Remaining Undos: ");
+            mvprintw(1, 0, "Remaining Moves: %d", moves);
+            mvprintw(1, 30, "Remaining Undos: %d", undos);
             mvprintw(2, 0, "Score: ");
             mvprintw(2, 30, "Key Status: ");
             mvprintw(3, 0, "Next drop in line: 'C', 'C', 'B', 'C', 'B'");
@@ -296,11 +296,22 @@ class List
 
             int door_dis = distance(keyX, keyY, doorX, doorY);
 
+            moves = initial_dis + door_dis;
+
             //int total_dis = key_dis + door_dis;
         }
 
         void movement(int input)
         {
+            stack.push(playerX,playerY);
+            if ((input == KEY_UP && playerX-1==prevX)||(input == KEY_DOWN && playerX+1==prevX)||(input == KEY_LEFT && playerY-1==prevY)||(input == KEY_RIGHT && playerY+1==prevY))
+            {
+                mvprintw(5, 7, "Press 'a' to use undo feature for moving back!!!");
+            }
+
+            prevX = playerX;
+            prevY = playerY;
+
             character(playerX, playerY, '.');
             if (input == KEY_UP && playerX > 0)
             {
@@ -330,11 +341,14 @@ class List
             {
                 mvprintw(5, 7, "Getting closer");
             }
+            initial_dis = key_dis;
+            moves--;
 
             display();
-
             
         }
+
+        
 };
 
 void initialize()
