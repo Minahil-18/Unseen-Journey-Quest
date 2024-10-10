@@ -303,12 +303,13 @@ class List
 
         void movement(int input)
         {
-            stack.push(playerX,playerY);
             if ((input == KEY_UP && playerX-1==prevX)||(input == KEY_DOWN && playerX+1==prevX)||(input == KEY_LEFT && playerY-1==prevY)||(input == KEY_RIGHT && playerY+1==prevY))
             {
-                mvprintw(5, 7, "Press 'a' to use undo feature for moving back!!!");
+                mvprintw(6, 0, "Press 'a' to use undo feature for moving back!!!");
+                return;
             }
 
+            stack.push(playerX,playerY);
             prevX = playerX;
             prevY = playerY;
 
@@ -348,7 +349,25 @@ class List
             
         }
 
-        
+        void undo()
+        {
+            if (!stack.empty() && undos>0)
+            {
+                StackNode* prev = stack.pop();
+                if (prev!=nullptr)
+                {
+                    character(playerX,playerY,'.');
+                    playerX = prev->a;
+                    playerY = prev->b;
+                    character(playerX, playerY, 'P');
+                    undos--;
+                    delete prev;
+                }
+                display();
+            }
+        }
+
+
 };
 
 void initialize()
@@ -375,7 +394,14 @@ int main()
     int key;
     while ((key = getch()) != 27)
     {
-        L1.movement(key);
+        if (key == 'a')
+        {
+            L1.undo();
+        }
+        else
+        {
+            L1.movement(key);
+        }
     }
 
     endwin();
