@@ -92,6 +92,7 @@ class List
         int undos;
         int prevX;
         int prevY;
+        bool KEY;
 
     public:
         int playerX;
@@ -100,6 +101,10 @@ class List
         int keyY;
         int initial_dis;
         int moves;
+        int bombX;
+        int bombY;
+        int doorX;
+        int doorY;
 
         List(int row, int col)
         {
@@ -109,6 +114,7 @@ class List
             prevX = -1;
             prevY = -1;
             undos = 6; // easy level
+            KEY = false;
 
             Grid();
         }
@@ -262,8 +268,8 @@ class List
             }
             character(keyX, keyY, 'K');
 
-            int doorX = rand() % rows;
-            int doorY = rand() % cols;
+            doorX = rand() % rows;
+            doorY = rand() % cols;
             
             initial_dis = distance(playerX, playerY, keyX, keyY);
             
@@ -274,8 +280,8 @@ class List
             }
             character(doorX, doorY, 'D');
 
-            int bombX = rand() % rows;
-            int bombY = rand() % cols;
+            bombX = rand() % rows;
+            bombY = rand() % cols;
             while ((bombX == playerX && bombY == playerY) || (bombX == keyX && bombY == keyY) || (bombX == doorX && bombY == doorY))
             {
                 bombX = rand() % rows;
@@ -330,6 +336,13 @@ class List
             {
                 playerY--;
             }
+
+            if (playerX == keyX && playerY == keyY)
+            {
+                KEY = true;
+                mvprintw(2,30,"Key Status: True");
+            }
+
             character(playerX, playerY, 'P');
 
             int key_dis = distance(playerX, playerY, keyX, keyY);
