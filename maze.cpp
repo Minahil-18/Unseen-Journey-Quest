@@ -343,6 +343,18 @@ class List
                 mvprintw(2,30,"Key Status: True");
             }
 
+            if (playerX == bombX && playerY == bombY)
+            {
+                mvprintw(7,0,"BOMB EXPLODED!!! So the game is over!");
+                mvprintw(8,0,"Press esc to quit the game");
+            }
+
+            if (playerX == doorX && playerY == doorY)
+            {
+                mvprintw(7,0,"Congtatulations. You unlocked the door and won the game!");
+                mvprintw(8,0,"Press esc to quit the game");
+            }
+
             character(playerX, playerY, 'P');
 
             int key_dis = distance(playerX, playerY, keyX, keyY);
