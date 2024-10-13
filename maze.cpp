@@ -351,8 +351,19 @@ class List
 
             if (playerX == doorX && playerY == doorY)
             {
-                mvprintw(7,0,"Congtatulations. You unlocked the door and won the game!");
-                mvprintw(8,0,"Press esc to quit the game");
+                if (KEY)
+                {
+                    mvprintw(7,0,"Congtatulations. You unlocked the door and won the game!");
+                    mvprintw(8,0,"Press esc to quit the game");
+                }
+                else
+                {
+                    mvprintw(7,0,"Find the key first in order to unlock!!!");
+                }
+            }
+            else
+            {
+                mvprintw(7,0,"Find the key first in order to unlock!!!");
             }
 
             character(playerX, playerY, 'P');
