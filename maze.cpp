@@ -434,7 +434,7 @@ class List
             {
                 mvprintw(7,0,"GAME OVER!!! You've run out of moves.");
                 mvprintw(8,0,"Press esc to exit the game");
-                mvprintw(9, 0, "Final Score: %d", score);
+                mvprintw(2, 0, "Score: %d", score);
                 refresh();
                 return;
                 
@@ -483,6 +483,7 @@ class List
 
             if ((playerX == coinX1 && playerY1 == coinY1) || (playerX == coinX2 && playerY1 == coinY2) || (playerX == coinX3 && playerY1 == coinY3) || (playerX == coinX4 && playerY1 == coinY4)) // if coin found
             {
+                score += 2;
                 undos++;
                 queue.Enqueue(playerX, playerY);
 
@@ -521,16 +522,18 @@ class List
             {
                 mvprintw(7,0,"BOMB EXPLODED!!! So the game is over!");
                 mvprintw(8,0,"Press esc to quit the game");
+                mvprintw(2, 0, "Score: %d", score);
             }
 
             if (playerX == doorX && playerY == doorY)
             {
                 if (KEY)
                 {
+                    score += moves; 
                     mvprintw(7,0,"Congtatulations. You unlocked the door and won the game!");
                     mvprintw(8,0,"Press esc to quit the game");
                     score += moves;
-                    mvprintw(9, 0, "Final Score: %d", score);
+                    mvprintw(2, 0, "Score: %d", score);
                     
                     int gap = 16;
                     mvprintw(30, 0, "Items collected: ");
