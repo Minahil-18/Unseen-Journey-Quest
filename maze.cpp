@@ -289,14 +289,35 @@ class List
             }
             character(bombX, bombY, 'B');
 
-            int coinX = rand() % rows;
-            int coinY = rand() % cols;
-            while ((coinX == playerX && coinY == playerY) || (coinX == keyX && coinY == keyY) || (coinX == doorX && coinY == doorY) || (coinX == bombX && coinY == bombY))
+            int coinX1 = rand() % rows;
+            int coinY1 = rand() % cols;
+
+            while ((coinX1 == playerX && coinY1 == playerY) || (coinX1 == keyX && coinY1 == keyY) || (coinX1 == doorX && coinY1 == doorY) || (coinX1 == bombX && coinY1 == bombY))
             {
-                coinX = rand() % rows;
-                coinY = rand() % cols;
+                coinX1 = rand() % rows;
+                coinY1 = rand() % cols;
             }
-            character(coinX, coinY, 'C');
+            character(coinX1, coinY1, 'C');
+
+            int coinX2 = rand() % rows;
+            int coinY2 = rand() % cols;
+
+            while ((coinX2 == playerX && coinY2 == playerY) || (coinX2 == keyX && coinY2 == keyY) || (coinX2 == doorX && coinY2 == doorY) || (coinX2 == bombX && coinY2 == bombY))
+            {
+                coinX2 = rand() % rows;
+                coinY2 = rand() % cols;
+            }
+            character(coinX2, coinY2, 'C');
+
+            int coinX3 = rand() % rows;
+            int coinY3 = rand() % cols;
+
+            while ((coinX3 == playerX && coinY3 == playerY) || (coinX3 == keyX && coinY3 == keyY) || (coinX3 == doorX && coinY3 == doorY) || (coinX3 == bombX && coinY3 == bombY))
+            {
+                coinX3 = rand() % rows;
+                coinY3 = rand() % cols;
+            }
+            character(coinX3, coinY3, 'C');
 
             //int key_dis = distance(playerX, playerY, keyX, keyY);
 
@@ -323,7 +344,7 @@ class List
 
             int playerX1 = playerX;
             int playerY1 = playerY;
-            
+
             if (input == KEY_UP && playerX > 0)
             {
                 playerX1--;
