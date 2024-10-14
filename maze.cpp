@@ -196,6 +196,7 @@ class List
         int coinY3;
         int coinX4;
         int coinY4;
+        int score;
 
         List(int row, int col)
         {
@@ -206,6 +207,7 @@ class List
             prevY = -1;
             undos = 6; // easy level
             KEY = false;
+            score = 0;
 
             Grid();
         }
@@ -432,6 +434,7 @@ class List
             {
                 mvprintw(7,0,"GAME OVER!!! You've run out of moves.");
                 mvprintw(8,0,"Press esc to exit the game");
+                mvprintw(9, 0, "Final Score: %d", score);
                 refresh();
                 return;
                 
@@ -526,7 +529,9 @@ class List
                 {
                     mvprintw(7,0,"Congtatulations. You unlocked the door and won the game!");
                     mvprintw(8,0,"Press esc to quit the game");
-
+                    score += moves;
+                    mvprintw(9, 0, "Final Score: %d", score);
+                    
                     int gap = 16;
                     mvprintw(30, 0, "Items collected: ");
                     
