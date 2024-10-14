@@ -321,8 +321,9 @@ class List
 
             character(playerX, playerY, '.');
 
-            int playerX1;
-            int playerY1;
+            int playerX1 = playerX;
+            int playerY1 = playerY;
+            
             if (input == KEY_UP && playerX > 0)
             {
                 playerX1--;
