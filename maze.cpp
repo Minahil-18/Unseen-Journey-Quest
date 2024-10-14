@@ -389,6 +389,36 @@ class List
                 playerX = playerX1;
                 playerY = playerY1;
             }
+
+            if ((playerX == coinX1 && playerY1 == coinY1) || (playerX == coinX2 && playerY1 == coinY2) || (playerX == coinX3 && playerY1 == coinY3) || (playerX == coinX4 && playerY1 == coinY4)) // if coin found
+            {
+                undos++;
+
+                if (playerX == coinX1 && playerY1 == coinY1)
+                {
+                    coinX1 = -1;
+                    coinY1 = -1;
+                }
+
+                else if (playerX == coinX2 && playerY1 == coinY2)
+                {
+                    coinX2 = -1;
+                    coinY2 = -1;
+                }
+
+                else if (playerX == coinX3 && playerY1 == coinY3)
+                {
+                    coinX3 = -1;
+                    coinY3 = -1;
+                }
+
+                if (playerX == coinX4 && playerY1 == coinY4)
+                {
+                    coinX4 = -1;
+                    coinY4 = -1;
+                }
+
+            }
             if (playerX == keyX && playerY == keyY)
             {
                 KEY = true;
