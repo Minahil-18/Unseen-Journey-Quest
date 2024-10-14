@@ -320,23 +320,35 @@ class List
             prevY = playerY;
 
             character(playerX, playerY, '.');
+
+            int playerX1;
+            int playerY1;
             if (input == KEY_UP && playerX > 0)
             {
-                playerX--;
+                playerX1--;
             }
             else if (input == KEY_DOWN && playerX < rows - 1)
             {
-                playerX++;
+                playerX1++;
             }
             else if (input == KEY_RIGHT && playerY < cols - 1)
             {
-                playerY++;
+                playerY1++;
             }
             else if (input == KEY_LEFT && playerY > 0)
             {
-                playerY--;
+                playerY1--;
             }
 
+            if (playerX1 == doorX && playerY1 == doorY && KEY == false)
+            {
+                mvprintw(7, 0, "Find the key first in order to unlock!!!");
+            }
+            else
+            {
+                playerX = playerX1;
+                playerY = playerY1;
+            }
             if (playerX == keyX && playerY == keyY)
             {
                 KEY = true;
