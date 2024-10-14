@@ -389,7 +389,6 @@ class List
                 coinY1 = rand() % cols;
             }
             character(coinX1, coinY1, 'C');
-            queue.Enqueue(coinX1, coinY1);
 
             coinX2 = rand() % rows;
             coinY2 = rand() % cols;
@@ -400,7 +399,6 @@ class List
                 coinY2 = rand() % cols;
             }
             character(coinX2, coinY2, 'C');
-            queue.Enqueue(coinX2, coinY2);
 
             coinX3 = rand() % rows;
             coinY3 = rand() % cols;
@@ -411,7 +409,6 @@ class List
                 coinY3 = rand() % cols;
             }
             character(coinX3, coinY3, 'C');
-            queue.Enqueue(coinX3, coinY3);
 
             coinX4 = rand() % rows;
             coinY4 = rand() % cols;
@@ -422,19 +419,23 @@ class List
                 coinY4 = rand() % cols;
             }
             character(coinX4, coinY4, 'C');
-            queue.Enqueue(coinX4, coinY4);
-
-            //int key_dis = distance(playerX, playerY, keyX, keyY);
 
             int door_dis = distance(keyX, keyY, doorX, doorY);
 
             moves = initial_dis + door_dis;
 
-            //int total_dis = key_dis + door_dis;
         }
 
         void movement(int input)
         {
+            if (moves <= 0)
+            {
+                mvprintw(7,0,"GAME OVER!!! You've run out of moves.");
+                mvprintw(8,0,"Press esc to exit the game");
+                refresh();
+                return;
+                
+            }
             if ((input == KEY_UP && playerX-1==prevX)||(input == KEY_DOWN && playerX+1==prevX)||(input == KEY_LEFT && playerY-1==prevY)||(input == KEY_RIGHT && playerY+1==prevY))
             {
                 mvprintw(6, 0, "Press 'a' to use undo feature for moving back!!!");
@@ -480,6 +481,7 @@ class List
             if ((playerX == coinX1 && playerY1 == coinY1) || (playerX == coinX2 && playerY1 == coinY2) || (playerX == coinX3 && playerY1 == coinY3) || (playerX == coinX4 && playerY1 == coinY4)) // if coin found
             {
                 undos++;
+                queue.Enqueue(playerX, playerY);
 
                 if (playerX == coinX1 && playerY1 == coinY1)
                 {
@@ -524,7 +526,29 @@ class List
                 {
                     mvprintw(7,0,"Congtatulations. You unlocked the door and won the game!");
                     mvprintw(8,0,"Press esc to quit the game");
+
+                    int gap = 16;
+                    mvprintw(30, 0, "Items collected: ");
+                    
+                    bool comma = true;
+                    while (!queue.Empty())
+                    {
+                        QueueNode* coin = queue.Dequeue();
+                        if (!comma)
+                        {
+                            mvprintw(30, gap++, ",");
+                        }
+                        else
+                        {
+                            comma = false;
+                        }
+
+                        mvprintw(30, gap++, "(%d, %d)", coin->x, coin->y);
+                        gap += 7; 
+                        delete coin;
+                    }
                 }
+                
                 else
                 {
                     mvprintw(7,0,"Find the key first in order to unlock!!!");
