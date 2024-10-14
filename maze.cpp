@@ -38,6 +38,88 @@ class StackNode
 
 };
 
+class QueueNode
+{
+    public:
+        int x;
+        int y;
+        QueueNode* next;
+
+        QueueNode(int x_axis, int y_axis)
+        {
+            x = x_axis;
+            y = y_axis;
+            next = nullptr;
+        }
+};
+
+class Queue
+{
+    private:
+        QueueNode* front;
+        QueueNode* rear;
+
+    public:
+        Queue()
+        {
+            front = nullptr;
+            rear = nullptr;
+        }
+
+        void Enqueue(int a, int b)
+        {
+            QueueNode* newNode = new QueueNode(a,b);
+            if (rear == nullptr)
+            {
+                front = newNode;
+                rear = newNode;
+            }
+            else
+            {
+                rear->next = newNode;
+                rear = newNode;
+
+            }
+        }
+
+        QueueNode* Dequeue()
+        {
+            if (front == nullptr)
+            {
+                return nullptr;
+            }
+            
+            QueueNode* temp = front;
+            front = front->next;
+
+            if (front == nullptr)
+            {
+                rear = nullptr;
+            }
+
+            return temp;
+        }
+
+        bool Empty()
+        {
+            if (front == nullptr)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        ~Queue()
+        {
+            while(!Empty())
+            {
+                QueueNode* temp = Dequeue();
+                delete temp;
+            }
+        }
+
+};
+
 class Stack
 {
     private:
@@ -89,6 +171,7 @@ class List
         int rows;
         int cols;
         Stack stack;
+        Queue queue;
         int undos;
         int prevX;
         int prevY;
@@ -306,6 +389,7 @@ class List
                 coinY1 = rand() % cols;
             }
             character(coinX1, coinY1, 'C');
+            queue.Enqueue(coinX1, coinY1);
 
             coinX2 = rand() % rows;
             coinY2 = rand() % cols;
@@ -316,6 +400,7 @@ class List
                 coinY2 = rand() % cols;
             }
             character(coinX2, coinY2, 'C');
+            queue.Enqueue(coinX2, coinY2);
 
             coinX3 = rand() % rows;
             coinY3 = rand() % cols;
@@ -326,6 +411,7 @@ class List
                 coinY3 = rand() % cols;
             }
             character(coinX3, coinY3, 'C');
+            queue.Enqueue(coinX3, coinY3);
 
             coinX4 = rand() % rows;
             coinY4 = rand() % cols;
@@ -336,6 +422,7 @@ class List
                 coinY4 = rand() % cols;
             }
             character(coinX4, coinY4, 'C');
+            queue.Enqueue(coinX4, coinY4);
 
             //int key_dis = distance(playerX, playerY, keyX, keyY);
 
