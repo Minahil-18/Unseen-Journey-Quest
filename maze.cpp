@@ -278,27 +278,28 @@ class List
         void display()
         {
             mvprintw(0, 18, "Mode: Easy");
+            move(1, 0); // for 90
+            clrtoeol();
             mvprintw(1, 0, "Remaining Moves: %d", moves);
             mvprintw(1, 30, "Remaining Undos: %d", undos);
             mvprintw(2, 0, "Score: ");
             mvprintw(2, 30, "Key Status: ");
-            mvprintw(3, 0, "Next drop in line: 'C', 'C', 'B', 'C', 'B'");
-            mvprintw(5, 0, "Hint:");
+            mvprintw(4, 0, "Hint:");
 
-            int offsetX = 10;
-            int offsetY = 5;
+            int offsetX = 15;
+            int offsetY = 10;
             for (int i = 0; i < rows + 2; i++)
             {
                 for (int j = 0; j < cols + 2; j++)
                 {
                     if (i == 0 || i == rows + 1 || j == 0 || j == cols + 1)
                     {
-                        mvaddch(i + 6 + offsetY, j * 2 + offsetX, '#');
+                        mvaddch(i * 2 + offsetY, j * 4 + offsetX, '#');
                     }
                     else
                     {
                         char symbol = current(i - 1, j - 1)->dot;
-                        mvaddch(i + 6 + offsetY, j * 2 + offsetX, symbol);
+                        mvaddch(i * 2 + offsetY, j * 4 + offsetX, symbol);
                         // if (symbol == 'K' || symbol == 'D')
                         // {
                         //     mvaddch(i + 6 + offsetY, j * 2 + offsetX, '.');
@@ -473,7 +474,7 @@ class List
 
             if (playerX1 == doorX && playerY1 == doorY && KEY == false)
             {
-                mvprintw(7, 0, "Find the key first in order to unlock!!!");
+                mvprintw(5, 0, "Find the key first in order to unlock!!!");
             }
             else
             {
@@ -538,7 +539,7 @@ class List
                     mvprintw(2, 0, "Score: %d", score);
                     
                     int gap = 16;
-                    mvprintw(30, 0, "Items collected: ");
+                    mvprintw(38, 0, "Items collected: ");
                     
                     bool comma = true;
                     while (!queue.Empty())
@@ -553,7 +554,7 @@ class List
                             comma = false;
                         }
 
-                        mvprintw(30, gap++, "(%d, %d)", coin->x, coin->y);
+                        mvprintw(38, gap++, "(%d, %d)", coin->x, coin->y);
                         gap += 7; 
                         delete coin;
                     }
@@ -575,11 +576,11 @@ class List
 
             if (key_dis > initial_dis)
             {
-                mvprintw(5, 7, "Further away!!!");
+                mvprintw(4, 7, "Further away!!!");
             }
             else if (key_dis < initial_dis)
             {
-                mvprintw(5, 7, "Getting closer");
+                mvprintw(4, 7, "Getting closer");
             }
             initial_dis = key_dis;
             moves--;
@@ -620,8 +621,8 @@ void initialize()
 
 int main()
 {
-    int rows = 10;
-    int cols = 10;
+    int rows = 20;
+    int cols = 20;
 
     initialize();
 
