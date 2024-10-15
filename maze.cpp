@@ -523,6 +523,8 @@ class List
                 mvprintw(7,0,"BOMB EXPLODED!!! So the game is over!");
                 mvprintw(8,0,"Press esc to quit the game");
                 mvprintw(2, 0, "Score: %d", score);
+                refresh();
+                return;
             }
 
             if (playerX == doorX && playerY == doorY)
