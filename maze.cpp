@@ -621,8 +621,8 @@ void initialize()
 
 int main()
 {
-    int rows = 20;
-    int cols = 20;
+    int rows = 10;
+    int cols = 10;
 
     initialize();
 
