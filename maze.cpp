@@ -279,7 +279,7 @@ class List
         {
             mvprintw(0, 18, "Mode: Easy");
             move(1, 0); // for 90
-            clrtoeol();
+            clrtoeol(); // for 90
             mvprintw(1, 0, "Remaining Moves: %d", moves);
             mvprintw(1, 30, "Remaining Undos: %d", undos);
             mvprintw(2, 0, "Score: ");
