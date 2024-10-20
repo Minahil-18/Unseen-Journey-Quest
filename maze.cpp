@@ -666,21 +666,21 @@ void menu(List &L)
     mvprintw(9, 35, "H - Hard");
     mvprintw(11, 10, "Press 'E', 'M', or 'H' to select:");
     
-    char choice = getch();
+    char ch = getch();
 
-    if (choice == 'E' || choice == 'e') 
+    if (ch == 'E' || ch == 'e') 
     {
         L = List(10, 10);
         L.undos = 6;   
         L.moves += 6; 
     } 
-    else if (choice == 'M' || choice == 'm') 
+    else if (ch == 'M' || ch == 'm') 
     {
         L = List(15, 15); 
         L.undos = 4;       
         L.moves += 2;      
     } 
-    else if (choice == 'H' || choice == 'h') 
+    else if (ch == 'H' || ch == 'h') 
     {
         L = List(20, 20);  
         L.undos = 1;      
