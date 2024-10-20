@@ -172,7 +172,6 @@ class List
         int cols;
         Stack stack;
         Queue queue;
-        int undos;
         int prevX;
         int prevY;
         bool KEY;
@@ -185,6 +184,7 @@ class List
         int coinX1, coinY1, coinX2, coinY2, coinX3, coinY3, coinX4, coinY4;
         int score;
         int collected = 0;
+        int undos;
 
         List(int row, int col)
         {
@@ -193,7 +193,6 @@ class List
             cols = col;
             prevX = -1;
             prevY = -1;
-            undos = 6; // easy level
             KEY = false;
             score = 0;
 
@@ -506,7 +505,7 @@ class List
                     collected = 0;
                     regenerate();
                 }
-                
+
             }
             if (playerX == keyX && playerY == keyY)
             {
@@ -644,8 +643,7 @@ class List
             }
             character(coinX4, coinY4, 'C');
 
-
-        }
+        }        
 
 };
 
@@ -658,28 +656,74 @@ void initialize()
     curs_set(0);
 }
 
+void menu(List &L)
+{
+    clear();
+    mvprintw(4, 50, "WELCOME TO THE GAME");
+    mvprintw(6, 10, "Select Difficulty Level: ");
+    mvprintw(7, 35, "E - Easy");
+    mvprintw(8, 35, "M - Medium");
+    mvprintw(9, 35, "H - Hard");
+    mvprintw(11, 10, "Press 'E', 'M', or 'H' to select:");
+    
+    char choice = getch();
+
+    if (choice == 'E' || choice == 'e') 
+    {
+        L = List(10, 10);
+        L.undos = 6;   
+        L.moves += 6; 
+    } 
+    else if (choice == 'M' || choice == 'm') 
+    {
+        L = List(15, 15); 
+        L.undos = 4;       
+        L.moves += 2;      
+    } 
+    else if (choice == 'H' || choice == 'h') 
+    {
+        L = List(20, 20);  
+        L.undos = 1;      
+        L.moves = L.initial_dis;
+    } 
+    else 
+    {
+        mvprintw(13, 10, "Invalid choice! Please select again.");
+        refresh();
+        getch(); 
+        menu(L);  
+        return;   
+    }
+
+    L.random();  
+    clear();    
+    L.display();
+}
+
 int main()
 {
-    int rows = 10;
-    int cols = 10;
-
     initialize();
 
-    List L1(rows, cols);
+    List L(10, 10); 
+    menu(L);
 
-    L1.random();
-    L1.display();
+    L.random();     
+    L.display();  
 
     int key;
-    while ((key = getch()) != 27)
+    for (int i = 0; (key = getch()) != 27; i++)
     {
         if (key == 'a')
         {
-            L1.undo();
+            L.undo();
         }
         else
         {
-            L1.movement(key);
+            L.movement(key);
+        }
+        if (i % 500000 == 0 && i > 0)
+        {
+            random();
         }
     }
 
