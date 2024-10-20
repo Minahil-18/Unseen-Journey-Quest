@@ -597,14 +597,22 @@ class List
 
         void regenerate()
         {
-            coinX1 = -1;
-            coinY1 = -1;
-            coinX2 = -1;
-            coinY2 = -1;
-            coinX3 = -1;
-            coinY3 = -1;
-            coinX4 = -1;
-            coinY4 = -1;
+            if (coinX1 != -1 && coinY1 != -1)
+            {
+                character(coinX1, coinY1, '.');
+            }
+            if (coinX2 != -1 && coinY2 != -1)
+            {
+                character(coinX2, coinY2, '.');
+            } 
+            if (coinX3 != -1 && coinY3 != -1)
+            {
+                character(coinX3, coinY3, '.');
+            }
+            if (coinX4 != -1 && coinY4 != -1) 
+            {
+                character(coinX4, coinY4, '.');
+            }
 
             coinX1 = rand() % rows;
             coinY1 = rand() % cols;
@@ -645,8 +653,6 @@ class List
                 coinY4 = rand() % cols;
             }
             character(coinX4, coinY4, 'C');
-
-
 
         }        
 
