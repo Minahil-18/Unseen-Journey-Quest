@@ -181,7 +181,7 @@ class List
         int keyX, keyY, bombX, bombY, doorX, doorY;
         int initial_dis;
         int moves;
-        int coinX1, coinY1, coinX2, coinY2, coinX3, coinY3, coinX4, coinY4;
+        int coinX1, coinY1, coinX2, coinY2, coinX3, coinY3, coinX4, coinY4, initialX1, initialY1, initialX2, initialY2, initialX3, initialY3, initialX4, initialY4;
         int score;
         int collected = 0;
         int undos;
@@ -286,15 +286,15 @@ class List
                     else
                     {
                         char symbol = current(i - 1, j - 1)->dot;
-                        mvaddch(i * 2 + offsetY, j * 4 + offsetX, symbol);
-                        // if (symbol == 'K' || symbol == 'D')
-                        // {
-                        //     mvaddch(i + 6 + offsetY, j * 2 + offsetX, '.');
-                        // }
-                        // else
-                        // {
-                        //     mvaddch(i + 6 + offsetY, j * 2 + offsetX, symbol);
-                        // }
+                        // mvaddch(i * 2 + offsetY, j * 4 + offsetX, symbol);
+                        if (symbol == 'K' || symbol == 'D')
+                        {
+                            mvaddch(i * 2 + offsetY, j * 4 + offsetX, '.');
+                        }
+                        else
+                        {
+                            mvaddch(i * 2 + offsetY, j * 4 + offsetX, symbol);
+                        }
                     }
                 }
             }
@@ -372,6 +372,8 @@ class List
 
             coinX1 = rand() % rows;
             coinY1 = rand() % cols;
+            initialX1 = coinX1;
+            initialY1 = coinY1;
 
             while ((coinX1 == playerX && coinY1 == playerY) || (coinX1 == keyX && coinY1 == keyY) || (coinX1 == doorX && coinY1 == doorY) || (coinX1 == bombX && coinY1 == bombY))
             {
@@ -382,6 +384,8 @@ class List
 
             coinX2 = rand() % rows;
             coinY2 = rand() % cols;
+            initialX2 = coinX2;
+            initialY2 = coinY2;
 
             while ((coinX2 == playerX && coinY2 == playerY) || (coinX2 == keyX && coinY2 == keyY) || (coinX2 == doorX && coinY2 == doorY) || (coinX2 == bombX && coinY2 == bombY))
             {
@@ -392,6 +396,8 @@ class List
 
             coinX3 = rand() % rows;
             coinY3 = rand() % cols;
+            initialX3 = coinX3;
+            initialY3 = coinY3;
 
             while ((coinX3 == playerX && coinY3 == playerY) || (coinX3 == keyX && coinY3 == keyY) || (coinX3 == doorX && coinY3 == doorY) || (coinX3 == bombX && coinY3 == bombY))
             {
@@ -402,6 +408,8 @@ class List
 
             coinX4 = rand() % rows;
             coinY4 = rand() % cols;
+            initialX4 = coinX4;
+            initialY4 = coinY4;
 
             while ((coinX4 == playerX && coinY4 == playerY) || (coinX4 == keyX && coinY4 == keyY) || (coinX4 == doorX && coinY4 == doorY) || (coinX4 == bombX && coinY4 == bombY))
             {
@@ -423,7 +431,7 @@ class List
                 mvprintw(7,0,"GAME OVER!!! You've run out of moves.");
                 mvprintw(8,0,"Press esc to exit the game");
                 mvprintw(2, 0, "Score: %d", score);
-                refresh();
+                finalGrid();
                 return;
                 
             }
@@ -512,7 +520,7 @@ class List
                 mvprintw(7,0,"BOMB EXPLODED!!! So the game is over!");
                 mvprintw(8,0,"Press esc to quit the game");
                 mvprintw(2, 0, "Score: %d", score);
-                refresh();
+                finalGrid();
                 return;
             }
 
@@ -654,7 +662,74 @@ class List
             }
             character(coinX4, coinY4, 'C');
 
-        }        
+        }     
+
+        void finalGrid()
+        {
+            clear(); 
+            
+            mvprintw(4,0,"GAME OVER!!! ");
+            mvprintw(5,0,"Press esc to exit the game");
+            mvprintw(2, 0, "Score: %d", score);
+    
+            int offsetX = 15;
+            int offsetY = 10;
+            
+            for (int i = 0; i < rows + 2; i++)
+            {
+                for (int j = 0; j < cols + 2; j++)
+                {
+                    if (i == 0 || i == rows + 1 || j == 0 || j == cols + 1)
+                    {
+                        mvaddch(i * 2 + offsetY, j * 4 + offsetX, '#');
+                    }
+                    else
+                    {
+                        char symbol = current(i - 1, j - 1)->dot;
+
+                        if (i - 1 == keyX && j - 1 == keyY)
+                        {
+                            symbol = 'K'; 
+                        }
+                        else if (i - 1 == doorX && j - 1 == doorY)
+                        {
+                            symbol = 'D';
+                        }
+                        else if ((i - 1 == initialX1 && j - 1 == initialY1) || (i - 1 == initialX2 && j - 1 == initialY2) || (i - 1 == initialX3 && j - 1 == initialY3) || (i - 1 == initialX4 && j - 1 == initialY4))
+                        {
+                            symbol = 'C'; 
+                        }
+
+                        mvaddch(i * 2 + offsetY, j * 4 + offsetX, symbol);
+                    }
+                }
+            }
+
+            int gap = 16;
+            mvprintw(7, 0, "Items collected: ");
+            
+            bool comma = true;
+            while (!queue.Empty())
+            {
+                QueueNode* coin = queue.Dequeue();
+                if (!comma)
+                {
+                    mvprintw(7, gap++, ",");
+                }
+                else
+                {
+                    comma = false;
+                }
+
+                mvprintw(38, gap++, "(%d, %d)", coin->x, coin->y);
+                gap += 7; 
+                delete coin;
+            }
+
+            refresh();
+        }
+
+   
 
 };
 
@@ -684,18 +759,21 @@ void menu(List &L)
         L = List(10, 10);
         L.undos = 6;   
         L.moves += 6; 
+        // mvprintw(0, 18, "Mode: Easy");
     } 
     else if (ch == 'M' || ch == 'm') 
     {
         L = List(15, 15); 
         L.undos = 4;       
-        L.moves += 2;      
+        L.moves += 2;    
+        // mvprintw(0, 18, "Mode: Medium");  
     } 
     else if (ch == 'H' || ch == 'h') 
     {
         L = List(20, 20);  
         L.undos = 1;      
         L.moves = L.initial_dis;
+        // mvprintw(0, 18, "Mode: Hard");
     } 
     else 
     {
@@ -726,10 +804,8 @@ int main()
 
     while ((key = getch()) != 27) 
     {
-        if (i % 5 == 0 && i > 0)
+        if (i % 10 == 0 && i > 0)
         {
-            clear();
-            refresh();
             L.regenerate();
         }
 
