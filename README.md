@@ -1,7 +1,7 @@
 # Unseen-Journey-Quest
 
 ## Introduction
-Welcome to **Game Title**! This is an engaging adventure game where players navigate through a grid, collect coins, and solve puzzles to reach the exit. With varying difficulty levels, players can enjoy a challenging experience while honing their problem-solving skills.
+Welcome to **Unseen-Journey-Quest Game**! This is an engaging adventure game where players navigate through a grid, collect coins, and solve puzzles to reach the exit. With varying difficulty levels, players can enjoy a challenging experience while honing their problem-solving skills.
 
 ## Key Features and Game Mechanics
 - **Grid-based Navigation**: Move through a 10x10 grid filled with obstacles and treasures.
