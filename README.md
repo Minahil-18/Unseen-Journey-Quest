@@ -20,3 +20,8 @@ Welcome to **Game Title**! This is an engaging adventure game where players navi
 
 
 ![Easy](Unseen-Journey-Quest/easy_level.png)
+![GameOver](Unseen-Journey-Quest/gameover.png)
+![Hard](Unseen-Journey-Quest/hard_level.png)
+![lose](Unseen-Journey-Quest/lose.png)
+![medium](Unseen-Journey-Quest/medium_level.png)
+![menu](Unseen-Journey-Quest/menu.png)
