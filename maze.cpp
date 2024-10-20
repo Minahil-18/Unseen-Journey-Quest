@@ -659,12 +659,12 @@ void initialize()
 void menu(List &L)
 {
     clear();
-    mvprintw(4, 50, "WELCOME TO THE GAME");
-    mvprintw(6, 10, "Select Difficulty Level: ");
-    mvprintw(7, 35, "E - Easy");
-    mvprintw(8, 35, "M - Medium");
-    mvprintw(9, 35, "H - Hard");
-    mvprintw(11, 10, "Press 'E', 'M', or 'H' to select:");
+    mvprintw(5, 45, "WELCOME TO THE GAME");
+    mvprintw(7, 10, "Select Difficulty Level: ");
+    mvprintw(9, 45, "E - Easy");
+    mvprintw(14, 45, "M - Medium");
+    mvprintw(19, 45, "H - Hard");
+    mvprintw(22, 10, "Press 'E', 'M', or 'H' to select your difficulty level");
     
     char ch = getch();
 
