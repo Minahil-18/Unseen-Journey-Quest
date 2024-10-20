@@ -19,7 +19,7 @@ Welcome to **Unseen-Journey-Quest Game**! This is an engaging adventure game whe
    cd Unseen-Journey-Quest
 
 ## easy
-![Easy](Unseen-Journey-Quest/easy_level.png)
+![Easy](./Unseen-Journey-Quest/easy_level.png)
 ## gameover
 ![GameOver](Unseen-Journey-Quest/gameover.png)
 ## hard
