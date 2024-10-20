@@ -721,7 +721,7 @@ class List
                     comma = false;
                 }
 
-                mvprintw(38, gap++, "(%d, %d)", coin->x, coin->y);
+                mvprintw(7, gap++, "(%d, %d)", coin->x, coin->y);
                 gap += 7; 
                 delete coin;
             }
