@@ -699,7 +699,6 @@ class List
                         {
                             symbol = 'C'; 
                         }
-
                         mvaddch(i * 2 + offsetY, j * 4 + offsetX, symbol);
                     }
                 }
@@ -727,9 +726,7 @@ class List
             }
 
             refresh();
-        }
-
-   
+        }   
 
 };
 
