@@ -18,3 +18,5 @@ Welcome to **Game Title**! This is an engaging adventure game where players navi
    git clone https://github.com/Minahil-18/Unseen-Journey-Quest.git
    cd Unseen-Journey-Quest
 
+
+![Easy](Unseen-Journey-Quest/easy_level.png)
