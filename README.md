@@ -23,10 +23,10 @@ Welcome to **Unseen-Journey-Quest Game**! This is an engaging adventure game whe
 ## gameover
 ![GameOver](gameover.png)
 ## hard
-![Hard](Unseen-Journey-Quest/hard_level.png)
+![Hard](hard_level.png)
 ## lose
-![lose](Unseen-Journey-Quest/lose.png)
+![lose](lose.png)
 ## medium
-![medium](Unseen-Journey-Quest/medium_level.png)
+![medium](medium_level.png)
 ## menu
-![menu](Unseen-Journey-Quest/menu.png)
+![menu](menu.png)
