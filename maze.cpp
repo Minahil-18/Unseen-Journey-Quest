@@ -416,7 +416,7 @@ class List
 
         }
 
-        void movement(int input)
+        void movement(int input, int i)
         {
             if (moves <= 0)
             {
@@ -498,12 +498,6 @@ class List
                 {
                     coinX4 = -1;
                     coinY4 = -1;
-                }
-
-                if (collected == 4)
-                {
-                    collected = 0;
-                    regenerate();
                 }
 
             }
@@ -603,6 +597,15 @@ class List
 
         void regenerate()
         {
+            coinX1 = -1;
+            coinY1 = -1;
+            coinX2 = -1;
+            coinY2 = -1;
+            coinX3 = -1;
+            coinY3 = -1;
+            coinX4 = -1;
+            coinY4 = -1;
+
             coinX1 = rand() % rows;
             coinY1 = rand() % cols;
 
@@ -642,6 +645,8 @@ class List
                 coinY4 = rand() % cols;
             }
             character(coinX4, coinY4, 'C');
+
+
 
         }        
 
@@ -711,24 +716,31 @@ int main()
     L.display();  
 
     int key;
-    for (int i = 0; (key = getch()) != 27; i++)
+    int i = 0;
+
+    while ((key = getch()) != 27) 
     {
-        if (key == 'a')
+        if (i % 5 == 0 && i > 0)
+        {
+            clear();
+            refresh();
+            L.regenerate();
+        }
+
+        if (key == 'a') 
         {
             L.undo();
         }
-        else
+        else 
         {
-            L.movement(key);
+            L.movement(key, i);
         }
-        if (i % 500000 == 0 && i > 0)
-        {
-            random();
-        }
+
+        i++;
     }
 
-    endwin();
-
+    endwin(); 
     return 0;
 }
+
 
